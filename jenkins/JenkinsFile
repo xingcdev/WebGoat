@@ -1,0 +1,47 @@
+pipeline {
+  agent {
+    label 'agent1'
+  }
+  stages {
+    stage('Initialize') {
+      steps {
+        script {
+          echo "Workspace: ${env.WORKSPACE}"
+          echo "Job Name: ${env.JOB_NAME}"
+          echo "User: ${env.USER}"
+          sh 'rm -rf *'
+        }
+      }
+    }
+    stage('Build') {
+      steps {
+        script {
+          sh './mvnw clean install -DskipTests'
+          sh 'ls -la'
+        }
+      }
+    }
+    stage('TruffleHog - Search secrets') {
+      steps {
+        sh 'docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/xingcdev/WebGoat'
+      }
+    }
+    stage('Snyk Scan') {
+      steps {
+        snykSecurity(
+          snykInstallation: 'snyk', snykTokenId: 'snyk-api-token', projectName: 'WebGoat', failOnIssues: 'false'
+        )
+        script {
+
+          echo "scan end"
+        }
+      }
+    }
+    stage('Deploy') {
+      steps {
+        echo 'Deploying...'
+        sh './mvnw spring-boot:run'
+      }
+    }
+  }
+}
