@@ -9,7 +9,6 @@ pipeline {
           echo "Workspace: ${env.WORKSPACE}"
           echo "Job Name: ${env.JOB_NAME}"
           echo "User: ${env.USER}"
-          sh 'rm -rf *'
         }
       }
     }
