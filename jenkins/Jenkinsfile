@@ -20,7 +20,12 @@ pipeline {
         }
       }
     }
-    stage('TruffleHog - Search secrets') {
+    stage('Quality - SonarQube') {
+      withSonarQubeEnv() {
+        sh "./mvnw clean verify sonar:sonar -Dsonar.projectKey=testing-lab -Dsonar.projectName='testing-lab'"
+      }
+    }
+    stage('Secrets - TruffleHog') {
       steps {
         sh 'docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/xingcdev/WebGoat'
       }
@@ -31,7 +36,6 @@ pipeline {
           snykInstallation: 'snyk', snykTokenId: 'snyk-api-token', projectName: 'WebGoat', failOnIssues: 'false'
         )
         script {
-
           echo "scan end"
         }
       }
