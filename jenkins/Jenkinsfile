@@ -26,7 +26,7 @@ pipeline {
           // Maven installation name
           def mvn = tool 'maven';
         }
-        withSonarQubeEnv() {
+        withSonarQubeEnv('SonarQube Scanner') {
           sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=testing-lab -Dsonar.projectName='testing-lab'"
         } 
       }
