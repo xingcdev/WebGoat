@@ -21,8 +21,10 @@ pipeline {
       }
     }
     stage('Quality - SonarQube') {
-      withSonarQubeEnv() {
-        sh "./mvnw clean verify sonar:sonar -Dsonar.projectKey=testing-lab -Dsonar.projectName='testing-lab'"
+      steps {
+        withSonarQubeEnv() {
+          sh "./mvnw clean verify sonar:sonar -Dsonar.projectKey=testing-lab -Dsonar.projectName='testing-lab'"
+        } 
       }
     }
     stage('Secrets - TruffleHog') {
