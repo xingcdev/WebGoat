@@ -28,7 +28,7 @@ pipeline {
     // }
     stage('Secrets - TruffleHog') {
       steps {
-        sh 'docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/xingcdev/WebGoat'
+        sh 'docker run --rm trufflesecurity/trufflehog:latest github --repo https://github.com/xingcdev/WebGoat'
       }
     }
     stage('Snyk Scan') {
