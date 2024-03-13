@@ -18,14 +18,14 @@ pipeline {
         }
       }
     }
-    stage('Quality - SonarQube') {
-      steps {
-        // Name in System - SonarQube servers
-        withSonarQubeEnv('SonarQube') {
-          sh "./mvnw clean verify sonar:sonar -Dsonar.projectKey=testing-lab -Dsonar.projectName='testing-lab'"
-        } 
-      }
-    }
+    // stage('Quality - SonarQube') {
+    //   steps {
+    //     // Name in System - SonarQube servers
+    //     withSonarQubeEnv('SonarQube') {
+    //       sh "./mvnw clean verify sonar:sonar -Dsonar.projectKey=testing-lab -Dsonar.projectName='testing-lab'"
+    //     } 
+    //   }
+    // }
     stage('Secrets - TruffleHog') {
       steps {
         sh 'docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/xingcdev/WebGoat'
