@@ -51,11 +51,11 @@ pipeline {
         steps {
             script {
                 def url = 'http://127.0.0.1:8080/WebGoat'
-                def response = httpRequest url: url, validResponseCodes: '200', ignoreSslErrors: true
-                if (response.status == 200) {
-                    echo "Success!."
+                def response = sh(script: "curl -s -o /dev/null -w '%{http_code}' ${url}", returnStdout: true).trim()
+                if (response == '200') {
+                    echo "Success!"
                 } else {
-                    error "Failed ${url}."
+                    error "Failed, unable to reach ${url}."
                 }
             }
         }
