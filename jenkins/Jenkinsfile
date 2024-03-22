@@ -27,6 +27,11 @@ pipeline {
       }
     }
     stage('Secrets - TruffleHog') {
+        when {
+                expression { 
+                    return env.SKIP_TRUFFLEHOG != 'true'
+                }
+            }
       steps {
         sh 'docker run --rm trufflesecurity/trufflehog:latest github --repo https://github.com/xingcdev/WebGoat'
       }
