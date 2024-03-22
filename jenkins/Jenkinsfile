@@ -44,10 +44,10 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying...'
-        sh './mvnw spring-boot:run'
+        sh './mvnw spring-boot:run > /dev/null 2>&1 &'
       }
     }
-  stage('Verify Deploy') {
+    stage('Verify Deploy') {
         steps {
             script {
                 def url = 'http://127.0.0.1:8080/WebGoat'
