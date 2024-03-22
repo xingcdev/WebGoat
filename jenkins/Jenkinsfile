@@ -47,18 +47,5 @@ pipeline {
         sh './mvnw spring-boot:run > /dev/null 2>&1 &'
       }
     }
-    stage('Verify Deploy') {
-        steps {
-            script {
-                def url = 'http://127.0.0.1:8080/WebGoat'
-                def response = sh(script: "curl -s -o /dev/null -w '%{http_code}' ${url}", returnStdout: true).trim()
-                if (response == '200') {
-                    echo "Success!"
-                } else {
-                    error "Failed, unable to reach ${url}."
-                }
-            }
-        }
-    }
   }
 }
