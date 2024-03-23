@@ -1,5 +1,10 @@
 pipeline {
   agent any
+  parameters {
+      string(name: 'PASSWORD', defaultValue: '', description: 'PASSWORD environment variable')
+      string(name: 'JWT_VOTES_PASSWORD', defaultValue: '', description: 'JWT refresh password')
+      string(name: 'JWT_REFRESH_PASSWORD', defaultValue: '', description: 'JWT votes password')
+  }
   stages {
     stage('Initialize') {
       steps {
@@ -13,7 +18,7 @@ pipeline {
     stage('Build') {
       steps {
         script {
-          sh './mvnw clean install -DskipTests'
+          sh './mvnw clean install -DskipTests -DPASSWORD=${params.PASSWORD} -DJWT_REFRESH_PASSWORD=${params.JWT_REFRESH_PASSWORd} -DJWT_VOTES_PASSWORD=${params.JWT_VOTES_PASSWORD}'
           sh 'ls -la'
         }
       }
