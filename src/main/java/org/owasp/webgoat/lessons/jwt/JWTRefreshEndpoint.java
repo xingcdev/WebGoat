@@ -25,7 +25,6 @@ package org.owasp.webgoat.lessons.jwt;
 import static org.springframework.http.ResponseEntity.ok;
 
 import io.jsonwebtoken.*;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -100,7 +99,8 @@ public class JWTRefreshEndpoint extends AssignmentEndpoint {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
     try {
-      Jws<Claims> parsedToken = Jwts.parser().setSigningKey(JWT_PASSWORD).parseClaimsJws(token.replace("Bearer ", ""));
+      Jws<Claims> parsedToken =
+          Jwts.parser().setSigningKey(JWT_PASSWORD).parseClaimsJws(token.replace("Bearer ", ""));
       Claims claims = parsedToken.getBody();
       String user = (String) claims.get("user");
       if ("Tom".equals(user)) {
