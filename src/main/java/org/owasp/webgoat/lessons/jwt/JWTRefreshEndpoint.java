@@ -24,12 +24,8 @@ package org.owasp.webgoat.lessons.jwt;
 
 import static org.springframework.http.ResponseEntity.ok;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Header;
-import io.jsonwebtoken.Jwt;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -89,7 +85,7 @@ public class JWTRefreshEndpoint extends AssignmentEndpoint {
         Jwts.builder()
             .setIssuedAt(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toDays(10)))
             .setClaims(claims)
-            .signWith(SignatureAlgorithm.HS512, JWT_PASSWORD)
+            .signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, JWT_PASSWORD)
             .compact();
     Map<String, Object> tokenJson = new HashMap<>();
     String refreshToken = RandomStringUtils.randomAlphabetic(20);
