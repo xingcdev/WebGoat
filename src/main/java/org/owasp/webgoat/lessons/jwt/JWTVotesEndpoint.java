@@ -71,6 +71,7 @@ public class JWTVotesEndpoint extends AssignmentEndpoint {
 
   @Value("${webgoat.jwt.votes.password")
   public static final String JWT_PASSWORD = null;
+
   private static String validUsers = "TomJerrySylvester";
 
   private static int totalVotes = 38929;

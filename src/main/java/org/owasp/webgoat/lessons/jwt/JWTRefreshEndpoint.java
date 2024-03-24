@@ -57,8 +57,10 @@ public class JWTRefreshEndpoint extends AssignmentEndpoint {
 
   @Value("${webgoat.password")
   public static final String PASSWORD = null;
+
   @Value("${webgoat.jwt.refresh.password")
   private static final String JWT_PASSWORD = null;
+
   private static final List<String> validRefreshTokens = new ArrayList<>();
 
   @PostMapping(
