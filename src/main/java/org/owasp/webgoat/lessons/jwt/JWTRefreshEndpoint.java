@@ -67,7 +67,7 @@ public class JWTRefreshEndpoint extends AssignmentEndpoint {
   @Value("${webgoat.jwt.refresh.password}")
   private String jwtPassword;
 
-  private static String PASSWORD;
+  public static String PASSWORD;
   private static String JWT_PASSWORD;
 
   @PostConstruct
