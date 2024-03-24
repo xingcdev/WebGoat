@@ -30,6 +30,7 @@ import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.impl.TextCodec;
 import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,7 +73,7 @@ public class JWTRefreshEndpoint extends AssignmentEndpoint {
   @PostConstruct
   public void initStaticFields() {
     PASSWORD = password;
-    JWT_PASSWORD = jwtPassword;
+    JWT_PASSWORD = TextCodec.BASE64.encode(jwtPassword);
   }
 
   private static final List<String> validRefreshTokens = new ArrayList<>();
