@@ -30,7 +30,6 @@ import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.impl.TextCodec;
 import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,21 +60,8 @@ import org.springframework.web.bind.annotation.RestController;
 })
 public class JWTRefreshEndpoint extends AssignmentEndpoint {
 
-  @Value("${webgoat.password}")
-  private String password;
-
-  @Value("${webgoat.jwt.refresh.password}")
-  private String jwtPassword;
-
-  public static String PASSWORD;
-  private static String JWT_PASSWORD;
-
-  @PostConstruct
-  public void initStaticFields() {
-    PASSWORD = password;
-    JWT_PASSWORD = TextCodec.BASE64.encode(jwtPassword);
-  }
-
+  public static final String PASSWORD = "bm5nhSkxCXZkKRy4";
+  private static final String JWT_PASSWORD = "bm5n3SkxCX4kKRy4";
   private static final List<String> validRefreshTokens = new ArrayList<>();
 
   @PostMapping(
