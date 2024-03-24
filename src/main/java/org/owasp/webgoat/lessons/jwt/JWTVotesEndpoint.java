@@ -68,15 +68,15 @@ import org.springframework.web.bind.annotation.RestController;
 })
 public class JWTVotesEndpoint extends AssignmentEndpoint {
 
-    @Value("${webgoat.jwt.votes.password}")
-    private String jwtVotesPassword;
+  @Value("${webgoat.jwt.votes.password}")
+  private String jwtVotesPassword;
 
-    private static String JWT_PASSWORD;
+  private static String JWT_PASSWORD;
 
-    @PostConstruct
-    public void initStaticFields() {
-        JWT_PASSWORD = jwtVotesPassword;
-    }
+  @PostConstruct
+  public void initStaticFields() {
+    JWT_PASSWORD = jwtVotesPassword;
+  }
 
   private static String validUsers = "TomJerrySylvester";
 
