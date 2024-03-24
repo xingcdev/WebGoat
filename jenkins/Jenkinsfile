@@ -26,16 +26,6 @@ pipeline {
         } 
       }
     }
-    stage('Secrets - TruffleHog') {
-        when {
-                expression { 
-                    return env.SKIP_TRUFFLEHOG != 'true'
-                }
-            }
-      steps {
-        sh 'docker run --rm trufflesecurity/trufflehog:latest github --repo https://github.com/xingcdev/WebGoat'
-      }
-    }
     stage('Snyk Scan') {
       steps {
         snykSecurity(
@@ -44,6 +34,16 @@ pipeline {
         script {
           echo "scan end"
         }
+      }
+    }
+    stage('Secrets - TruffleHog') {
+        when {
+                expression { 
+                    return env.SKIP_TRUFFLEHOG != 'true'
+                }
+            }
+      steps {
+        sh 'docker run --rm trufflesecurity/trufflehog:latest github --repo https://github.com/xingcdev/WebGoat'
       }
     }
     stage('Deploy') {
