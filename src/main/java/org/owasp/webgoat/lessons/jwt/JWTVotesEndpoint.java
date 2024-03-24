@@ -30,6 +30,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.impl.TextCodec;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -75,7 +76,7 @@ public class JWTVotesEndpoint extends AssignmentEndpoint {
 
   @PostConstruct
   public void initStaticFields() {
-    JWT_PASSWORD = jwtVotesPassword;
+    JWT_PASSWORD = TextCodec.BASE64.encode(jwtVotesPassword);
   }
 
   private static String validUsers = "TomJerrySylvester";
