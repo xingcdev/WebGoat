@@ -59,10 +59,10 @@ import org.springframework.web.bind.annotation.RestController;
 })
 public class JWTRefreshEndpoint extends AssignmentEndpoint {
 
-  @Value("${webgoat.password")
+  @Value("${webgoat.password}")
   public static String PASSWORD;
 
-  @Value("${webgoat.jwt.refresh.password")
+  @Value("${webgoat.jwt.refresh.password}")
   private static String JWT_PASSWORD;
 
   private static final List<String> validRefreshTokens = new ArrayList<>();
