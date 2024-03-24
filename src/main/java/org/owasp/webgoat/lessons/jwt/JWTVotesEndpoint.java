@@ -71,7 +71,7 @@ public class JWTVotesEndpoint extends AssignmentEndpoint {
   @Value("${webgoat.jwt.votes.password}")
   private String jwtVotesPassword;
 
-  private static String JWT_PASSWORD;
+  public static String JWT_PASSWORD;
 
   @PostConstruct
   public void initStaticFields() {
