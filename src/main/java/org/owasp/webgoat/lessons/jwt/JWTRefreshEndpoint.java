@@ -36,6 +36,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.owasp.webgoat.container.assignments.AssignmentEndpoint;
 import org.owasp.webgoat.container.assignments.AssignmentHints;
@@ -59,11 +61,21 @@ import org.springframework.web.bind.annotation.RestController;
 })
 public class JWTRefreshEndpoint extends AssignmentEndpoint {
 
-  @Value("${webgoat.password}")
-  public static String PASSWORD;
+    @Value("${webgoat.password}")
+    private String password;
 
-  @Value("${webgoat.jwt.refresh.password}")
-  private static String JWT_PASSWORD;
+    @Value("${webgoat.jwt.refresh.password}")
+    private String jwtPassword;
+
+    private static String PASSWORD;
+    private static String JWT_PASSWORD;
+
+    // PostConstruct method to initialize static fields
+    @PostConstruct
+    public void initStaticFields() {
+        PASSWORD = password;
+        JWT_PASSWORD = jwtPassword;
+    }
 
   private static final List<String> validRefreshTokens = new ArrayList<>();
 
