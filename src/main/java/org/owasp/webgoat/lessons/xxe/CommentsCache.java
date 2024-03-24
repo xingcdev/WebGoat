@@ -100,6 +100,8 @@ public class CommentsCache {
     if (webSession.isSecurityEnabled()) {
       xif.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, ""); // Compliant
       xif.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, ""); // compliant
+      xif.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+      xif.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, false);
     }
 
     var xsr = xif.createXMLStreamReader(new StringReader(xml));
